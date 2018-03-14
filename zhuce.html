@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="telephone=no" name="format-detection">
+		<link rel="stylesheet" type="text/css" href="fonts/iconfont.css"/>
+		<script src="jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  	<meta charset="utf-8" />
+  	<style type="text/css">
+  		*{margin: 0;padding:0;}
+  		html,body{height: 100%;width: 100%;}
+  		.bg {background: url(img/bj_03.png)no-repeat; background-size:100% 100%; position:fixed; left:0; top:0; right:0; bottom: 0; z-index: 1; }
+  		#ceng{display:none;position: absolute;left: 0;top: 0;background: #000;opacity: .5;width: 100%;height: 100%;z-index: 111;}
+  		#msg{display: none;width:4rem;height:1rem;line-height:1rem;position: fixed;left: 50%;top: 50%;margin: -.5rem 0 0 -2rem;z-index: 222;background: #fff;color: red;font-size: .20rem;border-radius: .2rem;text-align: center;}
+  		form{width: 7.5rem;height: auto; position: relative; z-index: 2; }
+  		form img.logo{display:block;width: 2.3rem;height: 2.3rem; margin: 0 auto; padding-top:1rem;}
+  		div.zhuce_id,div.zhuce_password,div.zhuce_phone{width:6.8rem;height: .8rem;background: url(img/input@2x.png)no-repeat center center;background-size: 100% 100%;margin: .33rem auto;}
+  		div.zhuce_id i,div.zhuce_password i,div.zhuce_phone i{display: inline-block;font-size:.5rem;text-align:center;vertical-align:middle;float: left;height: .6rem;width: .6rem;padding: .1rem;}
+  		div.zhuce_id input,div.zhuce_password input,div.zhuce_phone input{display: inline-block;float: left;outline:none;border: 0;height: .8rem;width: 6rem;background:transparent ;text-indent: .1rem;font-size: .28rem;}
+  		div.zhuce_id input:focus{background-color:transparent;}
+  		form span.button{display:block;width:6.8rem;height:1.04rem;margin:.5rem auto .5rem;background: url(img/button_zc@2x.png)no-repeat center center;background-size: 100% 100%;position: relative;}
+  		form p{text-align: center;font-size: .28rem;}
+  		form p>a{color: #5c3214;text-decoration:none;list-style: none;font-size: .28rem;}
+  	</style>
+		<title>2048注册</title>
+	</head>
+	<body>
+			<div class="bg"></div>
+			<!--注册-->
+			<form method="post" action=" ">
+				<img src="img/2048@2x.png" class="logo" alt="" />
+				<div class="zhuce_id"><i class="icon iconfont icon-yonghu"></i><input type="text" name="zhuce_id" id="zhuce_id" placeholder="请输入账号" autocomplete="off"/></div>
+				<div class="zhuce_password"><i class="icon iconfont icon-mima"></i><input type="password" name="zhuce_password" id="zhuce_password" placeholder="请输入密码" autocomplete="off"/></div>
+				<div class="zhuce_phone"><i class="icon iconfont icon-shouji"></i><input type="text" name="zhuce_phone" id="zhuce_phone" placeholder="请输入密码" autocomplete="off"/></div>
+				<span onclick="cheche_zhuce()" class="button"></span>
+				<p><a href="2048.html">跳过登录</a></p>
+			</form>
+			<!--遮罩层-->
+			<div id="ceng"></div>
+			<!--报错提示-->
+			<div id="msg"></div>
+	</body>
+	<script type="text/javascript">
+//jquery的实现方式
+	$(function(){
+		$("#ceng").click(function(){
+			$(this).css("display","none");
+			$("#msg").html("").css("display","none");
+		})
+	})
+	
+	function cheche_zhuce(){
+		var _zhuce_id=$("#zhuce_id").val();
+		var _zhuce_password=$("#zhuce_password").val();
+		var _zhuce_phone=$("#zhuce_phone").val();
+		if(_zhuce_id==''){
+			if(_zhuce_id.length>=8){
+				$("#ceng").css("display","block");
+				$("#msg").html("账号不能少于8位，也不能超过18位").css("display","block");
+				$('#zhuce_id').focus;
+				return false;
+			}else{
+				$("#ceng").css("display","block");
+				$("#msg").html("账号不能为空").css("display","block")
+				$('#zhuce_id').focus;
+				return false;
+			}
+		}
+		if(_zhuce_password==""){
+				$("#ceng").css("display","block");
+				$("#msg").html("密码不能为空").css("display","block");
+				$('#zhuce_password').focus;
+				return false;
+		}
+		if(!(/^1[345789]\d{9}$/.test(_zhuce_phone))){
+				$("#ceng").css("display","block");
+				$("#msg").html("手机号有误，请慎重。").css("display","block");
+				$('#zhuce_phone').focus;
+				return false;
+			}
+		ajax_zhuce();
+	}
+	
+	function ajax_zhuce(){
+		$.post("zhuce.php",{zhuce_id:$("#zhuce_id").val(),zhuce_password:$("#zhuce_password").val(),zhuce_phone:$("#zhuce_phone").val()},
+			function(data){
+				alert(data);
+				if(data=="ok"){
+					window.location.href="index.php";
+				}else{
+					alert("失败");
+				}
+			});
+	}
+	</script>
+	<script type="text/javascript">
+		window.onload=function(){
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + "px";
+		}
+		window.onresize = function(){
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 7.5 + "px";
+		}
+	</script>
+</html>

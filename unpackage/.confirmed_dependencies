@@ -1,0 +1,40 @@
+{
+  "2048.html": {
+    "href": "2048.html",
+    "priority": 0,
+    "resources": [],
+    "refer": []
+  },
+  "zhuce.html": {
+    "href": "zhuce.html",
+    "resources": [
+      "zhuce.php",
+      "index.php",
+      "fonts/iconfont.css",
+      "jquery.min.js",
+      "img/bj_03.png",
+      "img/input@2x.png",
+      "img/button_zc@2x.png",
+      "img/2048@2x.png"
+    ],
+    "refer": [],
+    "priority": 0
+  },
+  "login.html": {
+    "href": "login.html",
+    "resources": [
+      "user_login.php",
+      "index.php",
+      "fonts/iconfont.css",
+      "jquery.min.js",
+      "img/bj_03.png",
+      "img/input@2x.png",
+      "img/button@2x.png",
+      "img/2048@2x.png"
+    ],
+    "refer": [
+      "zhuce.html"
+    ],
+    "priority": 0
+  }
+}

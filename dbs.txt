@@ -1,0 +1,10 @@
+创建user_account_number表
+		CREATE TABLE `user_account_number` (
+		  `id` varchar(10) NOT NULL,
+		  `user_id` varchar(20) NOT NULL,
+		  `user_password` varchar(50) CHARACTER SET utf8 NOT NULL,
+		  `name` varchar(20) NOT NULL,
+		  `phone` char(11) NOT NULL,
+		  `user_create_time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+		  `email` varchar(40) NOT NULL
+		) ENGINE=MyISAM DEFAULT CHARSET=latin1;
